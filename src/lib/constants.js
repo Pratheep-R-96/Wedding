@@ -97,5 +97,6 @@ export const NAV_LINKS = [
   { id: 'events', label: 'Events' },
   { id: 'countdown', label: 'Countdown' },
   { id: 'gallery', label: 'Gallery' },
+  { id: 'map', label: 'Venues' },
   { id: 'blessings', label: 'Blessings' },
 ]
