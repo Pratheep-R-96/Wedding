@@ -77,27 +77,11 @@ export default function Hero() {
           fetchpriority="high"
           pictureClass="h-full w-full"
           className="h-full w-full object-cover object-top sm:object-center"
-          style={{ filter: 'brightness(0.85) contrast(1.05)' }}
+          style={{ filter: 'brightness(0.92) contrast(1.08) saturate(1.02)' }}
         />
       </motion.div>
 
-      {/* Warm overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(rgba(251,247,240,0.65), rgba(251,247,240,0.85))',
-        }}
-      />
-
-      {/* Subtle vignette to center focus */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.28) 100%)',
-        }}
-      />
+      <div className="absolute inset-0 hero-overlay" />
 
       {/* Gold shimmer specks */}
       {SHIMMER_DOTS.map((dot, i) => (
@@ -140,7 +124,7 @@ export default function Hero() {
         <motion.div variants={revealMask} className="mb-4 w-full px-2">
           <h1
             className="leading-tight"
-            style={{ fontSize: 'clamp(2.25rem, 9vw, 6rem)' }}
+            style={{ fontSize: 'clamp(2.25rem, 9vw, 6rem)', textShadow: '0 2px 20px rgba(255,255,255,0.25)' }}
           >
             <span className="block font-serif font-bold text-ink break-words hyphens-auto">
               {COUPLE.groom}
