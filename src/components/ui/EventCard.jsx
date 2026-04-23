@@ -50,7 +50,7 @@ function handleViewMap(eventId) {
 
 export default function EventCard({ event }) {
   return (
-    <div className="group relative rounded-2xl bg-cream border border-gold/20 shadow-soft p-8 md:p-10 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-glow">
+    <div className="group relative rounded-2xl bg-cream border border-gold/20 shadow-soft p-8 md:p-10 text-center card-lift">
       {/* Icon */}
       <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-ivory transition-all group-hover:animate-pulse-glow">
         <EventIcon icon={event.icon} accent={event.accent} />
@@ -89,14 +89,14 @@ export default function EventCard({ event }) {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
         <button
           onClick={() => generateIcs(event)}
-          className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-gold transition-all hover:bg-gold hover:text-ivory"
+          className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-gold transition-all hover:bg-gold hover:text-ivory"
         >
           <CalendarPlus className="h-4 w-4" />
           Add to Calendar
         </button>
         <button
           onClick={() => handleViewMap(event.id)}
-          className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-gold transition-all hover:bg-gold hover:text-ivory"
+          className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-gold transition-all hover:bg-gold hover:text-ivory"
         >
           <MapPin className="h-4 w-4" />
           View on Map

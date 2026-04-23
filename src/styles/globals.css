@@ -10,8 +10,16 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-ivory text-ink font-sans antialiased;
+  }
+
+  section[id] {
+    scroll-margin-top: 96px;
   }
 
   body::after {
@@ -33,6 +41,26 @@
 @keyframes floatDrift {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
+}
+
+@keyframes ringDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes shineSweep {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(200%) rotate(25deg); }
+}
+
+@keyframes sparkSpin {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.4) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+@keyframes heartFloat {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-60px) scale(0.6); }
 }
 
 @layer components {
@@ -87,4 +115,46 @@
     background-color: theme('colors.ivory');
     padding: 0 8px;
   }
+
+  /* Gold button shine sweep on hover */
+  .btn-gold-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-gold-shine::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 40%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+    );
+    transform: translateX(-100%) rotate(25deg);
+    pointer-events: none;
+  }
+
+  .btn-gold-shine:hover::after {
+    animation: shineSweep 0.8s ease-out;
+  }
+
+  /* Card hover lift */
+  .card-lift {
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(201, 169, 110, 0.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn-gold-shine:hover::after { animation: none; }
 }

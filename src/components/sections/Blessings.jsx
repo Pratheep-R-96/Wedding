@@ -1,9 +1,40 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getBlessings, addBlessing } from '../../lib/blessings'
 import { scaleIn } from '../../lib/animations'
 
 const CARD_BG = ['bg-cream', 'bg-ivory', 'bg-blush/40']
+
+function HeartBurst({ onDone }) {
+  const hearts = Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    x: (Math.random() - 0.5) * 80,
+    delay: Math.random() * 0.2,
+    color: i % 2 === 0 ? '#C9A96E' : '#E8CFC9',
+  }))
+
+  return (
+    <span className="pointer-events-none absolute -top-2 left-1/2 -translate-x-1/2" aria-hidden="true">
+      {hearts.map((h) => (
+        <svg
+          key={h.id}
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill={h.color}
+          className="absolute"
+          style={{
+            left: h.x,
+            animation: `heartFloat 1s ease-out ${h.delay}s forwards`,
+          }}
+          onAnimationEnd={h.id === 0 ? onDone : undefined}
+        >
+          <path d="M12 21C12 21 3 13.5 3 8.5C3 5.5 5.5 3 8.5 3C10.3 3 11.7 4 12 5C12.3 4 13.7 3 15.5 3C18.5 3 21 5.5 21 8.5C21 13.5 12 21 12 21Z" />
+        </svg>
+      ))}
+    </span>
+  )
+}
 
 function QuoteMark() {
   return (
@@ -46,8 +77,18 @@ export default function Blessings() {
   const [relationship, setRelationship] = useState('')
   const [message, setMessage] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [showHearts, setShowHearts] = useState(false)
+  const sparkleRef = useRef(null)
 
   const canSubmit = name.trim() && message.trim() && message.length <= 280
+
+  const triggerSparkle = useCallback(() => {
+    const el = sparkleRef.current
+    if (!el) return
+    el.style.animation = 'none'
+    void el.offsetHeight
+    el.style.animation = 'sparkSpin 0.6s ease-out'
+  }, [])
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -64,6 +105,8 @@ export default function Blessings() {
     setName('')
     setRelationship('')
     setMessage('')
+    setShowHearts(true)
+    triggerSparkle()
     setTimeout(() => setSubmitting(false), 300)
   }
 
@@ -135,13 +178,16 @@ export default function Blessings() {
             </span>
           </div>
 
-          <button
-            type="submit"
-            disabled={!canSubmit || submitting}
-            className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-xs font-medium uppercase tracking-wider text-ivory transition-all hover:bg-goldDark disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Send Blessing ✨
-          </button>
+          <span className="relative inline-block">
+            <button
+              type="submit"
+              disabled={!canSubmit || submitting}
+              className="btn-gold-shine inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-xs font-medium uppercase tracking-wider text-ivory transition-all hover:bg-goldDark disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Send Blessing <span ref={sparkleRef} className="inline-block">✨</span>
+            </button>
+            {showHearts && <HeartBurst onDone={() => setShowHearts(false)} />}
+          </span>
         </motion.form>
 
         {/* Masonry wall */}

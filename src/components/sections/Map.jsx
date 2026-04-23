@@ -98,7 +98,7 @@ export default function VenueMap() {
               href={mapsLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-gold transition-all hover:bg-gold hover:text-ivory"
+              className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-gold transition-all hover:bg-gold hover:text-ivory"
             >
               <ExternalLink className="h-4 w-4" />
               Open in Google Maps
