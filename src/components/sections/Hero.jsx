@@ -6,6 +6,8 @@ import { fadeUp, revealMask } from '../../lib/animations'
 import CrossOrnament from '../ui/CrossOrnament'
 import Picture from '../ui/Picture'
 import heroCouple from '../../assets/hero-couple.jpg'
+import useCountdown from '@/hooks/useCountdown'
+import { WEDDING_DATE } from '@/lib/constants'
 
 const SHIMMER_DOTS = [
   { top: '12%', left: '18%', size: 6, opacity: 0.4, delay: 0 },
@@ -45,6 +47,8 @@ function scrollToStory() {
 export default function Hero() {
   const sectionRef = useRef(null)
   const prefersReduced = useReducedMotion()
+
+  const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE.getTime())
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -152,6 +156,35 @@ export default function Hero() {
         >
           Saturday &bull; 09 May 2026 &bull; Tirunelveli
         </motion.p>
+
+        <motion.div
+          variants={fadeUp}
+          className="mt-8 flex justify-center gap-4 flex-wrap"
+        >
+          {[
+            { label: 'DAYS', value: days },
+            { label: 'HOURS', value: hours },
+            { label: 'MINUTES', value: minutes },
+            { label: 'SECONDS', value: seconds },
+          ].map((item, idx) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 + idx * 0.06 }}
+              whileHover={{ scale: 1.05 }}
+              className="flex flex-col items-center px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white/40 backdrop-blur-md border border-gold/20 min-w-[70px] shadow-soft transition-transform"
+              style={{ boxShadow: '0 10px 30px rgba(201,169,110,0.2)' }}
+            >
+              <span className="text-2xl md:text-3xl font-serif text-goldDark">
+                {item.value}
+              </span>
+              <span className="text-xs tracking-widest text-muted mt-1">
+                {item.label}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Tagline */}
         <motion.p

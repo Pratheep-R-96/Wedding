@@ -97,7 +97,6 @@ export const GALLERY = [
 export const NAV_LINKS = [
   { id: 'story', label: 'Our Story' },
   { id: 'events', label: 'Events' },
-  { id: 'countdown', label: 'Countdown' },
   { id: 'gallery', label: 'Gallery' },
   { id: 'map', label: 'Venues' },
 ]
