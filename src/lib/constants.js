@@ -81,6 +81,17 @@ export const EVENTS = [
   },
 ]
 
+export const GALLERY = [
+  { src: 'https://picsum.photos/seed/pf-gallery1/600/800', alt: 'Pratheep & Fanny — engagement' },
+  { src: 'https://picsum.photos/seed/pf-gallery2/600/800', alt: 'Pratheep & Fanny — prayer together' },
+  { src: 'https://picsum.photos/seed/pf-gallery3/600/800', alt: 'Pratheep & Fanny — laughing in the garden' },
+  { src: 'https://picsum.photos/seed/pf-gallery4/600/800', alt: 'Pratheep & Fanny — church steps' },
+  { src: 'https://picsum.photos/seed/pf-gallery5/600/800', alt: 'Pratheep & Fanny — golden hour portrait' },
+  { src: 'https://picsum.photos/seed/pf-gallery6/600/800', alt: 'Pratheep & Fanny — ring close-up' },
+  { src: 'https://picsum.photos/seed/pf-gallery7/600/800', alt: 'Pratheep & Fanny — family blessing' },
+  { src: 'https://picsum.photos/seed/pf-gallery8/600/800', alt: 'Pratheep & Fanny — walking hand in hand' },
+]
+
 export const NAV_LINKS = [
   { id: 'story', label: 'Our Story' },
   { id: 'events', label: 'Events' },
