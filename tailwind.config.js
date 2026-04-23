@@ -45,12 +45,23 @@ export default {
           '0%, 100%': { boxShadow: '0 0 20px rgba(201, 169, 110, 0.2)' },
           '50%': { boxShadow: '0 0 40px rgba(201, 169, 110, 0.5)' },
         },
+        kenBurns: {
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.08)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        bounce: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(8px)' },
+        },
       },
       animation: {
         'fade-up': 'fadeUp 0.8s ease-out both',
         shimmer: 'shimmer 2.5s linear infinite',
         'float-slow': 'floatSlow 6s ease-in-out infinite',
         'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+        'ken-burns': 'kenBurns 20s ease-in-out infinite',
+        'bounce-slow': 'bounce 2s ease-in-out infinite',
       },
     },
   },
