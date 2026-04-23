@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
 import { EVENTS } from '../../lib/constants'
-import { fadeUp, staggerContainer } from '../../lib/animations'
+import { fadeUp } from '../../lib/animations'
 import EventCard from '../ui/EventCard'
 
 export default function Events() {
   return (
-    <section id="events" className="py-24 md:py-32 bg-champagne/30">
+    <section id="events" className="relative py-24 md:py-32 bg-champagne/30 section-fade section-fade-champagne">
       <div className="mx-auto max-w-6xl px-6">
         {/* Heading */}
         <motion.div

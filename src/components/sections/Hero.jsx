@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { COUPLE } from '../../lib/constants'
 import { fadeUp, revealMask } from '../../lib/animations'
@@ -40,21 +41,34 @@ function scrollToStory() {
 }
 
 export default function Hero() {
+  const sectionRef = useRef(null)
+  const prefersReduced = useReducedMotion()
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  })
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, prefersReduced ? 0 : 40])
+
   return (
     <header
       id="hero"
+      ref={sectionRef}
       aria-label="Wedding announcement"
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
     >
-      {/* Ken Burns background */}
-      <div className="absolute inset-0 animate-ken-burns">
+      {/* Ken Burns background with scroll parallax */}
+      <motion.div
+        className={`absolute inset-0 ${prefersReduced ? '' : 'animate-ken-burns'}`}
+        style={{ y: bgY }}
+      >
         <img
           src="https://picsum.photos/id/1015/1920/1080"
           alt=""
           aria-hidden="true"
           className="h-full w-full object-cover"
         />
-      </div>
+      </motion.div>
 
       {/* Warm overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-ivory/70 via-ivory/50 to-ivory/80" />

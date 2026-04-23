@@ -68,7 +68,7 @@ export default function Blessings() {
   }
 
   return (
-    <section id="blessings" className="bg-ivory py-24 md:py-32">
+    <section id="blessings" className="relative bg-ivory py-24 md:py-32 section-fade">
       <div className="mx-auto max-w-6xl px-6">
         {/* Heading */}
         <motion.div

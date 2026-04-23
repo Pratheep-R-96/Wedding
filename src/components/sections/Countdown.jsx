@@ -1,5 +1,5 @@
 import { useRef, useMemo } from 'react'
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import useCountdown from '../../hooks/useCountdown'
 import { WEDDING_DATE } from '../../lib/constants'
 import { fadeUp } from '../../lib/animations'
@@ -76,13 +76,14 @@ function FlipDigit({ value, label }) {
 
 export default function Countdown() {
   const sectionRef = useRef(null)
+  const prefersReduced = useReducedMotion()
   const { days, hours, minutes, seconds, isOver } = useCountdown(WEDDING_DATE.getTime())
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
   })
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', prefersReduced ? '0%' : '30%'])
 
   return (
     <section

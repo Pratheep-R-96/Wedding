@@ -23,7 +23,7 @@ export default function VenueMap() {
   const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(active.mapsQuery)}`
 
   return (
-    <section id="map" className="bg-champagne/30 py-24 md:py-32">
+    <section id="map" className="relative bg-champagne/30 py-24 md:py-32 section-fade section-fade-champagne">
       <div className="mx-auto max-w-5xl px-6">
         {/* Heading */}
         <motion.div

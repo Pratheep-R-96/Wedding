@@ -118,7 +118,7 @@ export default function OurStory() {
   const timelineRef = useRef(null)
 
   return (
-    <section id="story" className="bg-ivory py-24 md:py-32">
+    <section id="story" className="relative bg-ivory py-24 md:py-32 section-fade">
       <div className="mx-auto max-w-6xl px-6">
         {/* Heading */}
         <motion.div

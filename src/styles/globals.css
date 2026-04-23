@@ -30,7 +30,41 @@
   100% { height: 80%; y: 4px; }
 }
 
+@keyframes floatDrift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
 @layer components {
+  .section-fade::before,
+  .section-fade::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 80px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .section-fade::before {
+    top: 0;
+    background: linear-gradient(to bottom, theme('colors.ivory'), transparent);
+  }
+
+  .section-fade::after {
+    bottom: 0;
+    background: linear-gradient(to top, theme('colors.ivory'), transparent);
+  }
+
+  .section-fade-champagne::before {
+    background: linear-gradient(to bottom, theme('colors.champagne / 30%'), transparent);
+  }
+
+  .section-fade-champagne::after {
+    background: linear-gradient(to top, theme('colors.champagne / 30%'), transparent);
+  }
+
   .heading-serif {
     @apply font-serif font-bold tracking-wide;
   }
