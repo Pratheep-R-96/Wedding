@@ -5,9 +5,7 @@ import Events from './components/sections/Events'
 import Countdown from './components/sections/Countdown'
 import Gallery from './components/sections/Gallery'
 import VenueMap from './components/sections/Map'
-import { NAV_LINKS } from './lib/constants'
-
-const BUILT = ['hero', 'story', 'events', 'countdown', 'gallery', 'map']
+import Blessings from './components/sections/Blessings'
 
 export default function App() {
   return (
@@ -18,16 +16,7 @@ export default function App() {
       <Countdown />
       <Gallery />
       <VenueMap />
-
-      {NAV_LINKS.filter((l) => !BUILT.includes(l.id)).map((link) => (
-        <section
-          key={link.id}
-          id={link.id}
-          className="flex min-h-screen items-center justify-center"
-        >
-          <h2 className="heading-serif text-3xl text-muted/40">{link.label}</h2>
-        </section>
-      ))}
+      <Blessings />
     </PageShell>
   )
 }
