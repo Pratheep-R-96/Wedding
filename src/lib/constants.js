@@ -1,14 +1,16 @@
 export const COUPLE = {
   groom: 'Pratheep',
-  bride: 'Fanny',
+  bride: 'Fanny Praiselin',
 }
 
-export const WEDDING_DATE = new Date('2026-01-01T00:00:00')
+export const WEDDING_DATE = new Date('2026-05-09T10:00:00+05:30')
 
 export const NAV_LINKS = [
-  { label: 'Home', href: '#hero' },
-  { label: 'Our Story', href: '#our-story' },
-  { label: 'Events', href: '#events' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'RSVP', href: '#rsvp' },
+  { id: 'story', label: 'Our Story' },
+  { id: 'events', label: 'Events' },
+  { id: 'dress-code', label: 'Dress Code' },
+  { id: 'countdown', label: 'Countdown' },
+  { id: 'gallery', label: 'Gallery' },
+  { id: 'rsvp', label: 'RSVP' },
+  { id: 'blessings', label: 'Blessings' },
 ]
