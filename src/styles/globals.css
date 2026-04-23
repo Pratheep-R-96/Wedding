@@ -12,14 +12,31 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-ivory text-ink font-sans antialiased;
+    overflow-x: hidden;
   }
 
   section[id] {
     scroll-margin-top: 96px;
+  }
+
+  /* Keyboard-only focus ring — gold at 40 % opacity on all interactive elements */
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible,
+  [tabindex="0"]:focus-visible {
+    outline: 2px solid rgba(201, 169, 110, 0.4);
+    outline-offset: 2px;
+  }
+
+  /* Mouse-click on buttons should not show the outline ring */
+  button:focus:not(:focus-visible),
+  a:focus:not(:focus-visible) {
+    outline: none;
   }
 
   body::after {

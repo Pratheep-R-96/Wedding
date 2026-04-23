@@ -51,7 +51,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-ivory/80 border border-gold/20 text-muted hover:text-gold transition-colors"
+          className="absolute top-4 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-ivory/80 border border-gold/20 text-muted hover:text-gold transition-colors"
           aria-label="Close lightbox"
         >
           <X className="h-5 w-5" />
@@ -60,7 +60,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
         {/* Prev */}
         <button
           onClick={onPrev}
-          className="absolute left-4 md:left-8 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-ivory/80 border border-gold/20 text-muted hover:text-gold transition-colors"
+          className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-ivory/80 border border-gold/20 text-muted hover:text-gold transition-colors"
           aria-label="Previous image"
         >
           <ChevronLeft className="h-5 w-5" />
@@ -81,7 +81,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
         {/* Next */}
         <button
           onClick={onNext}
-          className="absolute right-4 md:right-8 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-ivory/80 border border-gold/20 text-muted hover:text-gold transition-colors"
+          className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-ivory/80 border border-gold/20 text-muted hover:text-gold transition-colors"
           aria-label="Next image"
         >
           <ChevronRight className="h-5 w-5" />

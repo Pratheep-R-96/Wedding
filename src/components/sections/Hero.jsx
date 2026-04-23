@@ -119,15 +119,18 @@ export default function Hero() {
         </motion.div>
 
         {/* Couple names */}
-        <motion.div variants={revealMask} className="mb-4">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight">
-            <span className="block font-serif font-bold text-ink">
+        <motion.div variants={revealMask} className="mb-4 w-full px-2">
+          <h1
+            className="leading-tight"
+            style={{ fontSize: 'clamp(2.25rem, 9vw, 6rem)' }}
+          >
+            <span className="block font-serif font-bold text-ink break-words hyphens-auto">
               {COUPLE.groom}
             </span>
-            <span className="block font-script text-gold text-[0.6em] my-1">
+            <span className="block font-script text-gold my-1" style={{ fontSize: '0.6em' }}>
               &amp;
             </span>
-            <span className="block font-serif font-bold text-ink">
+            <span className="block font-serif font-bold text-ink break-words hyphens-auto">
               {COUPLE.bride}
             </span>
           </h1>
@@ -161,7 +164,7 @@ export default function Hero() {
           variants={fadeUp}
           onClick={scrollToStory}
           aria-label="Scroll to Our Story"
-          className="mt-12 text-gold/60 hover:text-gold transition-colors"
+          className="mt-12 flex items-center justify-center p-3 text-gold/60 hover:text-gold transition-colors"
         >
           <ChevronDown className="h-6 w-6 animate-bounce-slow" />
         </motion.button>

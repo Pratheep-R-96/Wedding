@@ -57,7 +57,7 @@ export default function EventCard({ event }) {
       </div>
 
       {/* Kind label */}
-      <p className="text-xs font-sans font-medium uppercase tracking-[0.25em] text-gold mb-2">
+      <p className="text-xs font-sans font-medium uppercase tracking-[0.25em] text-goldDark mb-2">
         {event.kind}
       </p>
 
@@ -73,7 +73,7 @@ export default function EventCard({ event }) {
       <p className="font-serif italic text-sm text-muted mb-1">
         {event.date}
       </p>
-      <p className="font-serif italic text-sm text-gold mb-5">
+      <p className="font-serif italic text-sm text-goldDark mb-5">
         {event.time}
       </p>
 
@@ -89,14 +89,14 @@ export default function EventCard({ event }) {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
         <button
           onClick={() => generateIcs(event)}
-          className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-gold transition-all hover:bg-gold hover:text-ivory"
+          className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-3 text-xs font-medium uppercase tracking-wider text-goldDark transition-all hover:bg-gold hover:text-ivory min-h-[44px]"
         >
           <CalendarPlus className="h-4 w-4" />
           Add to Calendar
         </button>
         <button
           onClick={() => handleViewMap(event.id)}
-          className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-gold transition-all hover:bg-gold hover:text-ivory"
+          className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-3 text-xs font-medium uppercase tracking-wider text-goldDark transition-all hover:bg-gold hover:text-ivory min-h-[44px]"
         >
           <MapPin className="h-4 w-4" />
           View on Map

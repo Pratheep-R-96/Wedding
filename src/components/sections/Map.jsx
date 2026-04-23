@@ -48,7 +48,7 @@ export default function VenueMap() {
             <button
               key={event.id}
               onClick={() => setActiveId(event.id)}
-              className={`rounded-full px-5 py-2.5 text-xs font-medium uppercase tracking-wider transition-all duration-300 ${
+              className={`rounded-full px-5 py-3 text-xs font-medium uppercase tracking-wider transition-all duration-300 min-h-[44px] ${
                 event.id === activeId
                   ? 'bg-gold text-ivory shadow-soft'
                   : 'bg-cream text-ink border border-gold/20 hover:bg-champagne'
@@ -98,7 +98,7 @@ export default function VenueMap() {
               href={mapsLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-gold transition-all hover:bg-gold hover:text-ivory"
+              className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-3 text-xs font-medium uppercase tracking-wider text-goldDark transition-all hover:bg-gold hover:text-ivory min-h-[44px]"
             >
               <ExternalLink className="h-4 w-4" />
               Open in Google Maps

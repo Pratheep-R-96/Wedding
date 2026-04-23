@@ -141,7 +141,7 @@ export default function Countdown() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-5 md:gap-8"
+            className="grid grid-cols-2 min-[480px]:grid-cols-4 gap-5 md:gap-8 justify-items-center"
           >
             {TILES.map((key) => (
               <FlipDigit

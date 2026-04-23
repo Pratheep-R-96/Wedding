@@ -58,7 +58,7 @@ export default function Nav() {
 
           <button
             onClick={() => setOpen(true)}
-            className="md:hidden text-ink/70 hover:text-gold transition-colors"
+            className="md:hidden flex items-center justify-center p-2.5 -mr-2.5 text-ink/70 hover:text-gold transition-colors"
             aria-label="Open menu"
           >
             <Menu className="h-6 w-6" />
@@ -77,7 +77,7 @@ export default function Nav() {
           >
             <button
               onClick={() => setOpen(false)}
-              className="absolute top-6 right-6 text-ink/70 hover:text-gold transition-colors"
+              className="absolute top-4 right-4 flex items-center justify-center p-2.5 text-ink/70 hover:text-gold transition-colors"
               aria-label="Close menu"
             >
               <X className="h-6 w-6" />
@@ -106,7 +106,7 @@ export default function Nav() {
                       setOpen(false)
                       setTimeout(() => scrollTo(link.id), 300)
                     }}
-                    className="text-2xl font-serif text-ink/80 hover:text-gold transition-colors"
+                    className="min-h-[44px] px-6 py-2 text-2xl font-serif text-ink/80 hover:text-gold transition-colors"
                   >
                     {link.label}
                   </button>

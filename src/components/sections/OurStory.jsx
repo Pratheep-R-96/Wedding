@@ -88,7 +88,7 @@ function MilestoneCard({ milestone, index }) {
           isEven ? 'md:order-1 md:text-right' : 'md:order-2'
         }`}
       >
-        <p className="text-xs font-sans font-medium uppercase tracking-[0.25em] text-gold mb-2">
+        <p className="text-xs font-sans font-medium uppercase tracking-[0.25em] text-goldDark mb-2">
           {milestone.date}
         </p>
         <h3 className="font-serif text-xl md:text-2xl text-ink mb-3">

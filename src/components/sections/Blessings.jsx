@@ -149,14 +149,14 @@ export default function Blessings() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Your name *"
               required
-              className="rounded-xl border border-gold/20 bg-ivory px-4 py-3 text-sm font-sans text-ink placeholder:text-muted/50 outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-all"
+              className="w-full rounded-xl border border-gold/20 bg-ivory px-4 py-3 text-sm font-sans text-ink placeholder:text-muted/50 transition-all focus-visible:outline-none focus-visible:border-goldDark focus-visible:ring-2 focus-visible:ring-gold/40"
             />
             <input
               type="text"
               value={relationship}
               onChange={(e) => setRelationship(e.target.value)}
               placeholder="Relationship (e.g. College friend)"
-              className="rounded-xl border border-gold/20 bg-ivory px-4 py-3 text-sm font-sans text-ink placeholder:text-muted/50 outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-all"
+              className="w-full rounded-xl border border-gold/20 bg-ivory px-4 py-3 text-sm font-sans text-ink placeholder:text-muted/50 transition-all focus-visible:outline-none focus-visible:border-goldDark focus-visible:ring-2 focus-visible:ring-gold/40"
             />
           </div>
 
@@ -167,7 +167,7 @@ export default function Blessings() {
               placeholder="Your blessing or wish *"
               required
               rows={3}
-              className="w-full resize-none rounded-xl border border-gold/20 bg-ivory px-4 py-3 text-sm font-sans text-ink placeholder:text-muted/50 outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-all"
+              className="w-full resize-none rounded-xl border border-gold/20 bg-ivory px-4 py-3 text-sm font-sans text-ink placeholder:text-muted/50 transition-all focus-visible:outline-none focus-visible:border-goldDark focus-visible:ring-2 focus-visible:ring-gold/40"
             />
             <span
               className={`absolute bottom-3 right-3 text-[10px] font-sans ${

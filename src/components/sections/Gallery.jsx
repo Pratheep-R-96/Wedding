@@ -117,36 +117,40 @@ export default function Gallery() {
             </div>
           </div>
 
-          {/* Nav buttons */}
+          {/* Nav buttons — 44×44 minimum tap target */}
           <button
             onClick={scrollPrev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-ivory/80 border border-gold/20 text-gold shadow-soft backdrop-blur-sm transition-all hover:shadow-glow hover:scale-105"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-ivory/80 border border-gold/20 text-gold shadow-soft backdrop-blur-sm transition-all hover:shadow-glow hover:scale-105"
             aria-label="Previous slide"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={scrollNext}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-ivory/80 border border-gold/20 text-gold shadow-soft backdrop-blur-sm transition-all hover:shadow-glow hover:scale-105"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-ivory/80 border border-gold/20 text-gold shadow-soft backdrop-blur-sm transition-all hover:shadow-glow hover:scale-105"
             aria-label="Next slide"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
         </div>
 
-        {/* Dots */}
-        <div className="mt-8 flex justify-center gap-2">
+        {/* Dots — each button is 44px tall for accessible tap target */}
+        <div className="mt-6 flex justify-center gap-1">
           {scrollSnaps.map((_, i) => (
             <button
               key={i}
               onClick={() => emblaApi?.scrollTo(i)}
               aria-label={`Go to slide ${i + 1}`}
-              className={`transition-all duration-300 rounded-full ${
-                i === selected
-                  ? 'w-8 h-2.5 bg-gold'
-                  : 'w-2.5 h-2.5 bg-champagne hover:bg-gold/50'
-              }`}
-            />
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] sm:min-w-0"
+            >
+              <span
+                className={`block transition-all duration-300 rounded-full ${
+                  i === selected
+                    ? 'w-8 h-2.5 bg-gold'
+                    : 'w-2.5 h-2.5 bg-champagne hover:bg-gold/50'
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>
