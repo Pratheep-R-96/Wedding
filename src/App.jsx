@@ -2,9 +2,10 @@ import PageShell from './components/layout/PageShell'
 import Hero from './components/sections/Hero'
 import OurStory from './components/sections/OurStory'
 import Events from './components/sections/Events'
+import Countdown from './components/sections/Countdown'
 import { NAV_LINKS } from './lib/constants'
 
-const BUILT = ['hero', 'story', 'events']
+const BUILT = ['hero', 'story', 'events', 'countdown']
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <Hero />
       <OurStory />
       <Events />
+      <Countdown />
 
       {NAV_LINKS.filter((l) => !BUILT.includes(l.id)).map((link) => (
         <section
