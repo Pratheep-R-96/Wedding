@@ -84,7 +84,6 @@ export const EVENTS = [
 export const NAV_LINKS = [
   { id: 'story', label: 'Our Story' },
   { id: 'events', label: 'Events' },
-  { id: 'dress-code', label: 'Dress Code' },
   { id: 'countdown', label: 'Countdown' },
   { id: 'gallery', label: 'Gallery' },
   { id: 'rsvp', label: 'RSVP' },
