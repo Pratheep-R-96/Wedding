@@ -5,6 +5,7 @@ import { COUPLE } from '../../lib/constants'
 import { fadeUp, revealMask } from '../../lib/animations'
 import CrossOrnament from '../ui/CrossOrnament'
 import Picture from '../ui/Picture'
+import heroCouple from '../../assets/hero-couple.jpg'
 
 const SHIMMER_DOTS = [
   { top: '12%', left: '18%', size: 6, opacity: 0.4, delay: 0 },
@@ -61,10 +62,10 @@ export default function Hero() {
       {/* Ken Burns background with scroll parallax */}
       <motion.div
         className={`absolute inset-0 ${prefersReduced ? '' : 'animate-ken-burns'}`}
-        style={{ y: bgY }}
+        style={{ y: bgY, willChange: 'transform' }}
       >
         <Picture
-          src="https://picsum.photos/id/1015/1920/1080"
+          src={heroCouple}
           alt=""
           aria-hidden="true"
           widths={[480, 768, 1200, 1920]}
@@ -75,18 +76,26 @@ export default function Hero() {
           decoding="async"
           fetchpriority="high"
           pictureClass="h-full w-full"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-top sm:object-center"
+          style={{ filter: 'brightness(0.85) contrast(1.05)' }}
         />
       </motion.div>
 
       {/* Warm overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ivory/70 via-ivory/50 to-ivory/80" />
-
-      {/* Radial gradient overlay */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(251,247,240,0.6) 0%, transparent 70%)',
+          background:
+            'linear-gradient(rgba(251,247,240,0.65), rgba(251,247,240,0.85))',
+        }}
+      />
+
+      {/* Subtle vignette to center focus */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.28) 100%)',
         }}
       />
 

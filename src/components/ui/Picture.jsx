@@ -11,6 +11,7 @@ const WIDTHS = [480, 768, 1200, 1920]
 function buildPicsumSrcset(src, widths, webp = false) {
   try {
     const url = new URL(src)
+    if (url.hostname !== 'picsum.photos') return null
     const parts = url.pathname.split('/').filter(Boolean)
     const ext = webp ? '.webp' : ''
 
@@ -30,7 +31,7 @@ function buildPicsumSrcset(src, widths, webp = false) {
         .join(', ')
     }
   } catch {}
-  return `${src} 1x`
+  return null
 }
 
 /**
@@ -70,12 +71,12 @@ export default function Picture({
       {avifSrcset && <source type="image/avif" srcSet={avifSrcset} sizes={sizes} />}
 
       {/* WebP — wide support, ~30% smaller than JPEG */}
-      <source type="image/webp" srcSet={webpSrcset} sizes={sizes} />
+      {webpSrcset && <source type="image/webp" srcSet={webpSrcset} sizes={sizes} />}
 
       {/* JPEG fallback */}
       <img
         src={src}
-        srcSet={jpgSrcset}
+        srcSet={jpgSrcset || undefined}
         sizes={sizes}
         alt={alt}
         width={width}
