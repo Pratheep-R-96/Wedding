@@ -1,13 +1,17 @@
 import PageShell from './components/layout/PageShell'
 import Hero from './components/sections/Hero'
+import OurStory from './components/sections/OurStory'
 import { NAV_LINKS } from './lib/constants'
+
+const BUILT = ['hero', 'story']
 
 export default function App() {
   return (
     <PageShell>
       <Hero />
+      <OurStory />
 
-      {NAV_LINKS.map((link) => (
+      {NAV_LINKS.filter((l) => !BUILT.includes(l.id)).map((link) => (
         <section
           key={link.id}
           id={link.id}
