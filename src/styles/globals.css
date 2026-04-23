@@ -25,6 +25,11 @@
   }
 }
 
+@keyframes eqPulse {
+  0% { height: 30%; y: 14px; }
+  100% { height: 80%; y: 4px; }
+}
+
 @layer components {
   .heading-serif {
     @apply font-serif font-bold tracking-wide;
