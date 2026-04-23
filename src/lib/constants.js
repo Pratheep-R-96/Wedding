@@ -55,6 +55,30 @@ export const EVENTS = [
     icon: 'cross',
     accent: 'gold',
   },
+  {
+    id: 'reception-lunch',
+    kind: 'Reception',
+    title: 'Post-Wedding Reception',
+    date: 'Saturday, 9 May 2026',
+    time: '12:30 PM',
+    venue: 'Moon Mahal',
+    address: 'Tirunelveli',
+    mapsQuery: 'Moon Mahal Tirunelveli',
+    icon: 'ring',
+    accent: 'blush',
+  },
+  {
+    id: 'reception-evening',
+    kind: 'Reception',
+    title: 'Evening Reception',
+    date: 'Saturday, 9 May 2026',
+    time: '7:00 PM',
+    venue: 'Sree Arunachalam Manickavel Mahal',
+    address: 'Thoothukudi',
+    mapsQuery: 'Sree Arunachalam Manickavel Mahal Thoothukudi',
+    icon: 'heart',
+    accent: 'sage',
+  },
 ]
 
 export const NAV_LINKS = [

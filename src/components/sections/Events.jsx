@@ -26,18 +26,53 @@ export default function Events() {
 
         {/* Cards grid */}
         <motion.div
-          variants={staggerContainer}
+          variants={{
+            initial: {},
+            animate: {
+              transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+            },
+          }}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, margin: '-80px' }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8 justify-items-center"
+          className="hidden lg:grid lg:grid-cols-3 gap-8 justify-items-center"
         >
           {EVENTS.map((event) => (
-            <motion.div key={event.id} variants={fadeUp} className="w-full max-w-md">
+            <motion.div key={event.id} variants={fadeUp} className="w-full">
               <EventCard event={event} />
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Mobile stack with flourish connectors */}
+        <div className="flex flex-col items-center gap-0 lg:hidden">
+          {EVENTS.map((event, i) => (
+            <div key={event.id} className="w-full max-w-md">
+              {i > 0 && (
+                <div className="flex justify-center py-4" aria-hidden="true">
+                  <svg width="60" height="20" viewBox="0 0 60 20" fill="none">
+                    <path
+                      d="M0 10 Q10 0 20 10 Q30 20 40 10 Q50 0 60 10"
+                      stroke="#C9A96E"
+                      strokeWidth="1"
+                      opacity="0.4"
+                    />
+                    <circle cx="30" cy="10" r="2" fill="#C9A96E" opacity="0.5" />
+                  </svg>
+                </div>
+              )}
+              <motion.div
+                variants={fadeUp}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: i * 0.12 }}
+              >
+                <EventCard event={event} />
+              </motion.div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
