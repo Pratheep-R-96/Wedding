@@ -42,6 +42,21 @@ export const STORY_MILESTONES = [
   },
 ]
 
+export const EVENTS = [
+  {
+    id: 'church',
+    kind: 'Holy Matrimony',
+    title: 'Church Wedding',
+    date: 'Saturday, 9 May 2026',
+    time: '10:00 AM',
+    venue: 'CSI Christ Church',
+    address: 'Shanthi Nagar, Tirunelveli',
+    mapsQuery: 'CSI Christ Church Shanthi Nagar Tirunelveli',
+    icon: 'cross',
+    accent: 'gold',
+  },
+]
+
 export const NAV_LINKS = [
   { id: 'story', label: 'Our Story' },
   { id: 'events', label: 'Events' },
