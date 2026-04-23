@@ -1,10 +1,12 @@
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback, useEffect, useRef, lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { GALLERY } from '../../lib/constants'
-import Lightbox from '../ui/Lightbox'
+import Picture from '../ui/Picture'
+
+const Lightbox = lazy(() => import('../ui/Lightbox'))
 
 function useDotButtons(emblaApi) {
   const [selected, setSelected] = useState(0)
@@ -104,11 +106,17 @@ export default function Gallery() {
                       className="block w-full overflow-hidden rounded-2xl shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                       aria-label={`View ${img.alt}`}
                     >
-                      <img
+                      <Picture
                         src={img.src}
                         alt={img.alt}
-                        className="aspect-[3/4] w-full object-cover transition-transform duration-500 hover:scale-105"
+                        widths={[480, 768, 1200]}
+                        sizes="(max-width: 767px) 83vw, 33vw"
+                        width={600}
+                        height={800}
                         loading="lazy"
+                        decoding="async"
+                        pictureClass="block w-full"
+                        className="aspect-[3/4] w-full object-cover transition-transform duration-500 hover:scale-105"
                       />
                     </button>
                   </div>
@@ -155,19 +163,21 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox — lazy-loaded; null fallback avoids flash since modal has its own bg */}
       {lightboxIndex !== null && (
-        <Lightbox
-          images={GALLERY}
-          index={lightboxIndex}
-          onClose={() => setLightboxIndex(null)}
-          onPrev={() =>
-            setLightboxIndex((prev) => (prev - 1 + GALLERY.length) % GALLERY.length)
-          }
-          onNext={() =>
-            setLightboxIndex((prev) => (prev + 1) % GALLERY.length)
-          }
-        />
+        <Suspense fallback={null}>
+          <Lightbox
+            images={GALLERY}
+            index={lightboxIndex}
+            onClose={() => setLightboxIndex(null)}
+            onPrev={() =>
+              setLightboxIndex((prev) => (prev - 1 + GALLERY.length) % GALLERY.length)
+            }
+            onNext={() =>
+              setLightboxIndex((prev) => (prev + 1) % GALLERY.length)
+            }
+          />
+        </Suspense>
       )}
     </section>
   )

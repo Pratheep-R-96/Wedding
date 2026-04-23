@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { STORY_MILESTONES } from '../../lib/constants'
 import { fadeUp } from '../../lib/animations'
+import Picture from '../ui/Picture'
 
 function TimelineLine({ containerRef }) {
   const prefersReduced = useReducedMotion()
@@ -99,15 +100,26 @@ function MilestoneCard({ milestone, index }) {
         </p>
 
         {milestone.image && (
-          <motion.img
-            src={milestone.image}
-            alt={milestone.title}
+          <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="mt-4 rounded-lg shadow-soft w-full max-w-sm object-cover aspect-[3/2] inline-block"
-          />
+            className="mt-4 inline-block w-full max-w-sm"
+          >
+            <Picture
+              src={milestone.image}
+              alt={milestone.title}
+              widths={[480, 768, 1200]}
+              sizes="(max-width: 767px) 100vw, 384px"
+              width={600}
+              height={400}
+              loading="lazy"
+              decoding="async"
+              pictureClass="block w-full"
+              className="rounded-lg shadow-soft w-full object-cover aspect-[3/2]"
+            />
+          </motion.div>
         )}
       </motion.div>
     </div>

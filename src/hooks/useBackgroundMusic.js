@@ -13,7 +13,7 @@ export default function useBackgroundMusic(src) {
     const audio = new Audio(src)
     audio.loop = true
     audio.volume = 0
-    audio.preload = 'auto'
+    audio.preload = 'none'  // defer network request until user explicitly plays
     audioRef.current = audio
 
     return () => {

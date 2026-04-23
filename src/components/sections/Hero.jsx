@@ -4,6 +4,7 @@ import { ChevronDown } from 'lucide-react'
 import { COUPLE } from '../../lib/constants'
 import { fadeUp, revealMask } from '../../lib/animations'
 import CrossOrnament from '../ui/CrossOrnament'
+import Picture from '../ui/Picture'
 
 const SHIMMER_DOTS = [
   { top: '12%', left: '18%', size: 6, opacity: 0.4, delay: 0 },
@@ -62,10 +63,18 @@ export default function Hero() {
         className={`absolute inset-0 ${prefersReduced ? '' : 'animate-ken-burns'}`}
         style={{ y: bgY }}
       >
-        <img
+        <Picture
           src="https://picsum.photos/id/1015/1920/1080"
           alt=""
           aria-hidden="true"
+          widths={[480, 768, 1200, 1920]}
+          sizes="100vw"
+          width={1920}
+          height={1080}
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+          pictureClass="h-full w-full"
           className="h-full w-full object-cover"
         />
       </motion.div>

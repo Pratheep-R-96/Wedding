@@ -6,26 +6,24 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:analyze": "vite build --mode analyze",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/great-vibes": "^5.2.8",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/playfair-display": "^5.2.8",
-    "@hookform/resolvers": "^5.2.2",
     "autoprefixer": "^10.5.0",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.38.0",
-    "gsap": "^3.15.0",
     "lucide-react": "^1.8.0",
     "postcss": "^8.5.10",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-hook-form": "^7.73.1",
-    "tailwindcss": "^3.4.19",
-    "zod": "^4.3.6"
+    "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
@@ -36,6 +34,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
+    "rollup-plugin-visualizer": "^7.0.1",
     "vite": "^8.0.9"
   }
 }
