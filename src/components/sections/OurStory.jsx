@@ -63,6 +63,13 @@ function DiamondNode({ index }) {
 
 function MilestoneCard({ milestone, index }) {
   const isEven = index % 2 === 0
+  const prefersReduced = useReducedMotion()
+  const imageRef = useRef(null)
+  const { scrollYProgress: imageScroll } = useScroll({
+    target: imageRef,
+    offset: ['start 90%', 'end 70%'],
+  })
+  const imageY = useTransform(imageScroll, [0, 1], [prefersReduced ? 0 : 10, 0])
 
   return (
     <div
@@ -92,33 +99,61 @@ function MilestoneCard({ milestone, index }) {
         <p className="text-xs font-sans font-medium uppercase tracking-[0.25em] text-goldDark mb-2">
           {milestone.date}
         </p>
-        <h3 className="font-serif text-xl md:text-2xl text-ink mb-3">
-          {milestone.title}
-        </h3>
+        <div
+          className={`mb-3 inline-flex items-center gap-2 ${
+            isEven ? 'md:flex-row-reverse md:justify-end' : ''
+          }`}
+        >
+          <span className="inline-block h-4 w-4 text-gold" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 3v18M7 8h10"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </span>
+          <h3 className="font-serif text-2xl md:text-3xl text-ink">
+            {milestone.title}
+          </h3>
+        </div>
         <p className="text-sm md:text-base text-muted leading-relaxed max-w-md inline-block">
           {milestone.body}
         </p>
 
         {milestone.image && (
           <motion.div
+            ref={imageRef}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
             className="mt-4 inline-block w-full max-w-sm"
+            style={{ y: imageY }}
           >
-            <Picture
-              src={milestone.image}
-              alt={milestone.title}
-              widths={[480, 768, 1200]}
-              sizes="(max-width: 767px) 100vw, 384px"
-              width={600}
-              height={400}
-              loading="lazy"
-              decoding="async"
-              pictureClass="block w-full"
-              className="rounded-lg shadow-soft w-full object-cover aspect-[3/2]"
-            />
+            <div className="group relative overflow-hidden rounded-2xl shadow-soft">
+              <Picture
+                src={milestone.image}
+                alt={milestone.title}
+                widths={[480, 768, 1200]}
+                sizes="(max-width: 767px) 100vw, 384px"
+                width={600}
+                height={450}
+                loading="lazy"
+                decoding="async"
+                pictureClass="block w-full"
+                className="w-full object-cover aspect-[4/3] transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div
+                className="absolute inset-0"
+                aria-hidden="true"
+                style={{
+                  background:
+                    'linear-gradient(to top, rgba(0,0,0,0.25), transparent)',
+                }}
+              />
+            </div>
           </motion.div>
         )}
       </motion.div>
