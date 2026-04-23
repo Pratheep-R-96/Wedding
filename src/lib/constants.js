@@ -10,37 +10,37 @@ export const STORY_MILESTONES = [
     date: 'December 21, 2025',
     title: 'The First Encounter',
     body: 'On a quiet Sunday, two paths crossed under His perfect timing. In that gentle stillness, something unspoken felt like home — a connection born not in words, but in peace, purpose, and divine design.',
-    image: '/images/story/encounter.jpg',
+    image: '/images/story/1.jpeg',
   },
   {
     date: 'January 24, 2026',
     title: 'Blossoms of a Beginning',
     body: 'What began with simple conversations soon bloomed into something beautiful. Between shared smiles, late-night calls, and quiet prayers, love took its first roots — tender, joyful, and full of promise.',
-    image: '/images/story/beginning.jpg',
+    image: '/images/story/2.jpeg',
   },
   {
     date: 'February 2026',
     title: 'Where Love Took Hold',
     body: 'Day by day, affection grew into certainty. What started as a spark became a steady flame — unwavering, patient, and deeply rooted in faith. Distance faded, and hearts drew closer than ever.',
-    image: '/images/story/love.jpg',
+    image: '/images/story/3.jpeg',
   },
   {
     date: 'March 2026',
     title: 'The Deepening of Us',
     body: 'With every shared moment, love matured into something unshakeable. Two lives, once separate, now moved in quiet harmony — guided by grace, strengthened by trust, and woven together by His plan.',
-    image: '/images/story/deepening.jpg',
+    image: '/images/story/4.jpeg',
   },
   {
     date: 'April 13, 2026',
     title: 'A Promise Forever',
     body: 'Before the warmth of family and the blessings of faith, a question was asked — and answered with forever. In that sacred “yes,” two hearts chose a lifetime of love, commitment, and Christ at the center.',
-    image: '/images/story/promise.jpg',
+    image: '/images/story/5.jpeg',
   },
   {
     date: 'May 2026',
     title: 'A Lifetime Etched Together',
     body: 'Bound not just by vows, but by a love written long before this day, we step into forever. This is only the beginning — a journey of faith, love, and countless tomorrows, together as one.',
-    image: '/images/story/forever.jpg',
+    image: '/images/story/6.jpeg',
   },
 ]
 
@@ -100,5 +100,4 @@ export const NAV_LINKS = [
   { id: 'countdown', label: 'Countdown' },
   { id: 'gallery', label: 'Gallery' },
   { id: 'map', label: 'Venues' },
-  { id: 'blessings', label: 'Blessings' },
 ]

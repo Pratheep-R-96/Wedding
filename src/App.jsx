@@ -10,7 +10,6 @@ import SectionShimmer from './components/ui/SectionShimmer'
 // Heavy sections deferred until the user scrolls toward them
 const Gallery = lazy(() => import('./components/sections/Gallery'))
 const VenueMap = lazy(() => import('./components/sections/Map'))
-const Blessings = lazy(() => import('./components/sections/Blessings'))
 
 export default function App() {
   return (
@@ -26,9 +25,6 @@ export default function App() {
         </Suspense>
         <Suspense fallback={<SectionShimmer minHeight="min-h-[600px]" />}>
           <VenueMap />
-        </Suspense>
-        <Suspense fallback={<SectionShimmer minHeight="min-h-[600px]" />}>
-          <Blessings />
         </Suspense>
       </PageShell>
     </>
