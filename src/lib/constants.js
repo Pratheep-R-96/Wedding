@@ -86,6 +86,5 @@ export const NAV_LINKS = [
   { id: 'events', label: 'Events' },
   { id: 'countdown', label: 'Countdown' },
   { id: 'gallery', label: 'Gallery' },
-  { id: 'rsvp', label: 'RSVP' },
   { id: 'blessings', label: 'Blessings' },
 ]
