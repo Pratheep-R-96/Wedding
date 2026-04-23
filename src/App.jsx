@@ -15,15 +15,19 @@ export default function App() {
     <>
       <LoadOverlay />
       <PageShell>
-        <Hero />
-        <OurStory />
-        <Events />
-        <Suspense fallback={<SectionShimmer minHeight="min-h-[700px]" />}>
-          <Gallery />
-        </Suspense>
-        <Suspense fallback={<SectionShimmer minHeight="min-h-[600px]" />}>
-          <VenueMap />
-        </Suspense>
+        {({ heroStart }) => (
+          <>
+            <Hero start={heroStart} />
+            <OurStory />
+            <Events />
+            <Suspense fallback={<SectionShimmer minHeight="min-h-[700px]" />}>
+              <Gallery />
+            </Suspense>
+            <Suspense fallback={<SectionShimmer minHeight="min-h-[600px]" />}>
+              <VenueMap />
+            </Suspense>
+          </>
+        )}
       </PageShell>
     </>
   )

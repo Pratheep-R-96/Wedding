@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { COUPLE } from '../../lib/constants'
@@ -23,14 +23,49 @@ const heroStagger = {
   initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
+      staggerChildren: 0.18,
+      delayChildren: 0.25,
     },
   },
 }
 
+const bgFade = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] },
+  },
+}
+
+const groomVariant = {
+  initial: { opacity: 0, x: -28 },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.75, ease: [0.25, 0.1, 0.25, 1] },
+  },
+}
+
+const brideVariant = {
+  initial: { opacity: 0, x: 28 },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.75, ease: [0.25, 0.1, 0.25, 1] },
+  },
+}
+
+const ampVariant = {
+  initial: { opacity: 0, scale: 0.9 },
+  animate: {
+    opacity: 1,
+    scale: 1.25,
+    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+  },
+}
+
 const crossVariant = {
-  initial: { opacity: 0, scale: 0.8, rotate: -8 },
+  initial: { opacity: 0, scale: 0.8, rotate: -10 },
   animate: {
     opacity: 1,
     scale: 1,
@@ -44,11 +79,20 @@ function scrollToStory() {
   if (el) el.scrollIntoView({ behavior: 'smooth' })
 }
 
-export default function Hero() {
+export default function Hero({ start = true }) {
   const sectionRef = useRef(null)
   const prefersReduced = useReducedMotion()
+  const [ready, setReady] = useState(false)
 
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE.getTime())
+
+  useEffect(() => {
+    if (prefersReduced) {
+      setReady(true)
+      return
+    }
+    setReady(Boolean(start))
+  }, [start, prefersReduced])
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -65,7 +109,21 @@ export default function Hero() {
     >
       {/* Ken Burns background with scroll parallax */}
       <motion.div
-        className={`absolute inset-0 ${prefersReduced ? '' : 'animate-ken-burns'}`}
+        variants={bgFade}
+        initial="initial"
+        animate={
+          prefersReduced
+            ? 'animate'
+            : {
+                opacity: 1,
+                scale: [1, 1.1],
+                transition: {
+                  opacity: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] },
+                  scale: { duration: 20, ease: 'linear', repeat: Infinity, repeatType: 'mirror' },
+                },
+              }
+        }
+        className="absolute inset-0"
         style={{ y: bgY, willChange: 'transform' }}
       >
         <Picture
@@ -85,7 +143,14 @@ export default function Hero() {
         />
       </motion.div>
 
-      <div className="absolute inset-0 hero-overlay" />
+      <div className="absolute inset-0 bg-black/40"></div>
+
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70"></div>
+
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.15),rgba(0,0,0,0.6))]"></div>
+
+      <div className="absolute inset-0 opacity-[0.06] mix-blend-overlay pointer-events-none bg-[url('/textures/noise.png')]" />
+      <div className="absolute top-0 left-1/2 w-[340px] h-[340px] sm:w-[400px] sm:h-[400px] -translate-x-1/2 bg-gold/20 blur-3xl opacity-30" />
 
       {/* Gold shimmer specks */}
       {SHIMMER_DOTS.map((dot, i) => (
@@ -108,102 +173,134 @@ export default function Hero() {
       <motion.div
         variants={heroStagger}
         initial="initial"
-        animate="animate"
-        className="relative z-10 flex flex-col items-center px-6 text-center"
+        animate={ready ? 'animate' : false}
+        className={`relative z-10 flex flex-col items-center px-6 text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] ${
+          ready ? '' : 'opacity-0'
+        }`}
       >
-        {/* Label */}
-        <motion.p
-          variants={fadeUp}
-          className="mb-6 text-xs font-sans font-medium uppercase tracking-[0.3em] text-muted"
-        >
-          We are getting married
-        </motion.p>
-
-        {/* Cross ornament */}
-        <motion.div variants={crossVariant} className="mb-6">
-          <CrossOrnament />
-        </motion.div>
-
-        {/* Couple names */}
-        <motion.div variants={revealMask} className="mb-4 w-full px-2">
-          <h1
-            className="leading-tight"
-            style={{ fontSize: 'clamp(2.25rem, 9vw, 6rem)', textShadow: '0 2px 20px rgba(255,255,255,0.25)' }}
-          >
-            <span className="block font-serif font-bold text-ink break-words hyphens-auto">
-              {COUPLE.groom}
-            </span>
-            <span className="block font-script text-gold my-1" style={{ fontSize: '0.6em' }}>
-              &amp;
-            </span>
-            <span className="block font-serif font-bold text-ink break-words hyphens-auto">
-              {COUPLE.bride}
-            </span>
-          </h1>
-        </motion.div>
-
-        {/* Ornamental divider */}
-        <motion.div
-          variants={fadeUp}
-          className="my-6 h-5 w-32 bg-ornate-divider bg-center bg-no-repeat"
-          aria-hidden="true"
-        />
-
-        {/* Date block */}
-        <motion.p
-          variants={fadeUp}
-          className="text-xs sm:text-sm font-sans font-medium uppercase tracking-[0.25em] text-muted"
-        >
-          Saturday &bull; 09 May 2026 &bull; Tirunelveli
-        </motion.p>
-
-        <motion.div
-          variants={fadeUp}
-          className="mt-8 flex justify-center gap-4 flex-wrap"
-        >
-          {[
-            { label: 'DAYS', value: days },
-            { label: 'HOURS', value: hours },
-            { label: 'MINUTES', value: minutes },
-            { label: 'SECONDS', value: seconds },
-          ].map((item, idx) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 + idx * 0.06 }}
-              whileHover={{ scale: 1.05 }}
-              className="flex flex-col items-center px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white/40 backdrop-blur-md border border-gold/20 min-w-[70px] shadow-soft transition-transform"
-              style={{ boxShadow: '0 10px 30px rgba(201,169,110,0.2)' }}
+            {/* Label */}
+            <motion.p
+              variants={fadeUp}
+              className="mb-6 text-xs font-sans font-medium uppercase tracking-[0.3em] text-white/80"
             >
-              <span className="text-2xl md:text-3xl font-serif text-goldDark">
-                {item.value}
-              </span>
-              <span className="text-xs tracking-widest text-muted mt-1">
-                {item.label}
-              </span>
+              We are getting married
+            </motion.p>
+
+            {/* Cross ornament */}
+            <motion.div variants={crossVariant} className="mb-6">
+              <CrossOrnament />
             </motion.div>
-          ))}
-        </motion.div>
 
-        {/* Tagline */}
-        <motion.p
-          variants={fadeUp}
-          className="mt-5 max-w-md font-serif italic text-sm sm:text-base text-muted/80 leading-relaxed"
-        >
-          Two souls, one faith, one forever — joined in Christ&rsquo;s love.
-        </motion.p>
+            {/* Couple names */}
+            <motion.div variants={revealMask} className="mb-4 w-full px-2">
+              <h1 className="leading-tight">
+                <motion.span
+                  variants={groomVariant}
+                  className="block font-serif tracking-wide text-white text-6xl md:text-7xl lg:text-8xl break-words hyphens-auto"
+                >
+                  {COUPLE.groom}
+                </motion.span>
+                <motion.span variants={ampVariant} className="block font-script text-gold my-2">
+                  &amp;
+                </motion.span>
+                <motion.span
+                  variants={brideVariant}
+                  className="block font-serif tracking-wide text-white text-6xl md:text-7xl lg:text-8xl break-words hyphens-auto"
+                >
+                  {COUPLE.bride}
+                </motion.span>
+              </h1>
+            </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.button
-          variants={fadeUp}
-          onClick={scrollToStory}
-          aria-label="Scroll to Our Story"
-          className="mt-12 flex items-center justify-center p-3 text-gold/60 hover:text-gold transition-colors"
-        >
-          <ChevronDown className="h-6 w-6 animate-bounce-slow" />
-        </motion.button>
+            {/* Ornamental divider */}
+            <motion.div
+              variants={fadeUp}
+              className="my-6 h-5 w-32 bg-ornate-divider bg-center bg-no-repeat"
+              aria-hidden="true"
+            />
+
+            {/* Date block */}
+            <motion.div
+              variants={fadeUp}
+              className="mt-6 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 inline-block text-sm md:text-base tracking-widest text-white/90"
+            >
+              SATURDAY • 09 MAY 2026 • TIRUNELVELI
+            </motion.div>
+
+            {/* Tagline */}
+            <motion.p
+              variants={fadeUp}
+              className="mt-4 max-w-md font-serif italic text-sm sm:text-base text-white/80 leading-relaxed"
+            >
+              Two souls, one faith, one forever — joined in Christ’s love.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut', delay: 1.25 }}
+              className="mt-8 flex justify-center gap-4 flex-wrap"
+            >
+              {[
+                { label: 'DAYS', value: days },
+                { label: 'HOURS', value: hours },
+                { label: 'MINUTES', value: minutes },
+                { label: 'SECONDS', value: seconds },
+              ].map((item, idx) => {
+                const isSeconds = item.label === 'SECONDS'
+                return (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 1.35 + idx * 0.06 }}
+                    whileHover={{ scale: 1.05 }}
+                    className={`flex flex-col items-center px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 min-w-[70px] flex-[1_1_calc(50%-1rem)] sm:flex-[0_0_auto] shadow-[0_0_40px_rgba(201,169,110,0.2)] transition-transform ${
+                      isSeconds ? 'shadow-[0_0_45px_rgba(201,169,110,0.22)]' : ''
+                    }`}
+                  >
+                    {isSeconds ? (
+                      <motion.span
+                        key={seconds}
+                        initial={prefersReduced ? false : { scale: 1, filter: 'drop-shadow(0 0 0 rgba(201,169,110,0))' }}
+                        animate={
+                          prefersReduced
+                            ? undefined
+                            : {
+                                scale: [1, 1.08, 1],
+                                filter: [
+                                  'drop-shadow(0 0 0 rgba(201,169,110,0))',
+                                  'drop-shadow(0 0 14px rgba(201,169,110,0.22))',
+                                  'drop-shadow(0 0 0 rgba(201,169,110,0))',
+                                ],
+                              }
+                        }
+                        transition={{ duration: 0.28, ease: 'easeOut' }}
+                        className="text-2xl md:text-3xl font-serif text-white"
+                      >
+                        {item.value}
+                      </motion.span>
+                    ) : (
+                      <span className="text-2xl md:text-3xl font-serif text-white">{item.value}</span>
+                    )}
+                    <span className="text-xs tracking-widest text-white/80 mt-1">{item.label}</span>
+                  </motion.div>
+                )
+              })}
+            </motion.div>
       </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.button
+        initial={{ opacity: 0, y: 10 }}
+        animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+        transition={{ duration: 0.6, delay: ready ? 1.1 : 0 }}
+        onClick={scrollToStory}
+        aria-label="Scroll to Our Story"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center p-3 text-white/60 hover:text-white/80 transition-colors"
+      >
+        <ChevronDown className="h-6 w-6 animate-bounce-slow" />
+      </motion.button>
     </header>
   )
 }
