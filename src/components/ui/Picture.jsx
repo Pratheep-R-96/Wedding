@@ -6,6 +6,8 @@
  * AVIF variants are generated at build time (e.g. via vite-imagetools).
  */
 
+import clsx from 'clsx'
+
 const WIDTHS = [480, 768, 1200, 1920]
 
 function buildPicsumSrcset(src, widths, webp = false) {
@@ -83,7 +85,10 @@ export default function Picture({
         height={height}
         loading={loading}
         decoding={decoding}
-        className={className}
+        className={clsx(
+          'transition-transform duration-700 ease-out group-hover:scale-105 group-hover:brightness-[1.05]',
+          className
+        )}
         {...rest}
       />
     </picture>

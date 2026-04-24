@@ -196,16 +196,19 @@ export default function Hero({ start = true }) {
               <h1 className="leading-tight">
                 <motion.span
                   variants={groomVariant}
-                  className="block font-serif tracking-wide text-white text-6xl md:text-7xl lg:text-8xl break-words hyphens-auto"
+                  className="block font-serif tracking-wide text-white text-6xl md:text-7xl lg:text-8xl break-words hyphens-auto drop-shadow-[0_10px_40px_rgba(201,169,110,0.14)]"
                 >
                   {COUPLE.groom}
                 </motion.span>
-                <motion.span variants={ampVariant} className="block font-script text-gold my-2">
+                <motion.span
+                  variants={ampVariant}
+                  className="block font-script text-gold my-2 drop-shadow-[0_0_18px_rgba(201,169,110,0.28)]"
+                >
                   &amp;
                 </motion.span>
                 <motion.span
                   variants={brideVariant}
-                  className="block font-serif tracking-wide text-white text-6xl md:text-7xl lg:text-8xl break-words hyphens-auto"
+                  className="block font-serif tracking-wide text-white text-6xl md:text-7xl lg:text-8xl break-words hyphens-auto drop-shadow-[0_10px_40px_rgba(201,169,110,0.14)]"
                 >
                   {COUPLE.bride}
                 </motion.span>
@@ -262,12 +265,13 @@ export default function Hero({ start = true }) {
                     {isSeconds ? (
                       <motion.span
                         key={seconds}
-                        initial={prefersReduced ? false : { scale: 1, filter: 'drop-shadow(0 0 0 rgba(201,169,110,0))' }}
+                        initial={prefersReduced ? false : { opacity: 0.85, scale: 0.98, filter: 'drop-shadow(0 0 0 rgba(201,169,110,0))' }}
                         animate={
                           prefersReduced
                             ? undefined
                             : {
-                                scale: [1, 1.08, 1],
+                                opacity: [0.85, 1, 1],
+                                scale: [0.98, 1.08, 1],
                                 filter: [
                                   'drop-shadow(0 0 0 rgba(201,169,110,0))',
                                   'drop-shadow(0 0 14px rgba(201,169,110,0.22))',
@@ -281,7 +285,15 @@ export default function Hero({ start = true }) {
                         {item.value}
                       </motion.span>
                     ) : (
-                      <span className="text-2xl md:text-3xl font-serif text-white">{item.value}</span>
+                      <motion.span
+                        key={item.value}
+                        initial={prefersReduced ? false : { opacity: 0, scale: 0.96 }}
+                        animate={prefersReduced ? undefined : { opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.25, ease: 'easeOut' }}
+                        className="text-2xl md:text-3xl font-serif text-white"
+                      >
+                        {item.value}
+                      </motion.span>
                     )}
                     <span className="text-xs tracking-widest text-white/80 mt-1">{item.label}</span>
                   </motion.div>

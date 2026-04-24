@@ -58,7 +58,7 @@ export default function EventCard({ event }) {
       }}
     >
       {/* Icon */}
-      <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-ivory transition-all group-hover:animate-pulse-glow">
+      <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-ivory transition-all group-hover:animate-pulse-glow group-hover:shadow-glow">
         <EventIcon icon={event.icon} accent={event.accent} />
       </div>
 

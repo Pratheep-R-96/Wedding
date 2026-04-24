@@ -63,7 +63,7 @@ export default {
         'float-slow': 'floatSlow 6s ease-in-out infinite',
         'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
         'ken-burns': 'kenBurns 20s ease-in-out infinite',
-        'bounce-slow': 'bounce 2s ease-in-out infinite',
+        'bounce-slow': 'bounce 2.8s ease-in-out infinite',
       },
     },
   },
