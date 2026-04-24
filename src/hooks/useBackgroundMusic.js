@@ -5,22 +5,55 @@ const FADE_MS = 600
 const FADE_IN_MS = 800
 const TARGET_VOL = 0.4
 
+const audioCache = new Map()
+
+function getOrCreateAudio(src) {
+  const cached = audioCache.get(src)
+  if (cached?.audio) {
+    cached.refs += 1
+    return cached.audio
+  }
+
+  const audio = new Audio(src)
+  audio.loop = true
+  audio.volume = 0
+  audio.preload = 'none' // defer network request until user explicitly plays
+
+  audioCache.set(src, { audio, refs: 1 })
+  return audio
+}
+
+function releaseAudio(src) {
+  const cached = audioCache.get(src)
+  if (!cached) return
+
+  cached.refs -= 1
+  if (cached.refs <= 0) {
+    cached.audio.pause()
+    cached.audio.src = ''
+    audioCache.delete(src)
+  }
+}
+
 export default function useBackgroundMusic(src) {
   const audioRef = useRef(null)
   const fadeRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
-    const audio = new Audio(src)
-    audio.loop = true
-    audio.volume = 0
-    audio.preload = 'none'  // defer network request until user explicitly plays
+    const audio = getOrCreateAudio(src)
     audioRef.current = audio
 
+    const sync = () => setIsPlaying(!audio.paused)
+    sync()
+    audio.addEventListener('play', sync)
+    audio.addEventListener('pause', sync)
+
     return () => {
-      audio.pause()
-      audio.src = ''
       cancelAnimationFrame(fadeRef.current)
+      audio.removeEventListener('play', sync)
+      audio.removeEventListener('pause', sync)
+      releaseAudio(src)
     }
   }, [src])
 
@@ -74,7 +107,6 @@ export default function useBackgroundMusic(src) {
     audio.play().then(() => {
       audio.volume = 0
       fadeToMs(TARGET_VOL, FADE_IN_MS)
-      setIsPlaying(true)
       localStorage.setItem(PREF_KEY, 'on')
     }).catch(() => {})
   }, [fadeToMs])
@@ -82,7 +114,6 @@ export default function useBackgroundMusic(src) {
   const fadeOut = useCallback(() => {
     fadeTo(0, () => {
       audioRef.current?.pause()
-      setIsPlaying(false)
       localStorage.setItem(PREF_KEY, 'off')
     })
   }, [fadeTo])
@@ -95,5 +126,11 @@ export default function useBackgroundMusic(src) {
     }
   }, [isPlaying, fadeIn, fadeOut])
 
-  return { isPlaying, toggle, fadeIn, fadeOut }
+  const getCurrentTime = useCallback(() => {
+    const audio = audioRef.current
+    if (!audio) return 0
+    return audio.currentTime || 0
+  }, [])
+
+  return { isPlaying, toggle, fadeIn, fadeOut, getCurrentTime }
 }

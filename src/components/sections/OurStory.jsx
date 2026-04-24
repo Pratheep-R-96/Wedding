@@ -69,7 +69,7 @@ function MilestoneCard({ milestone, index }) {
     target: imageRef,
     offset: ['start 90%', 'end 70%'],
   })
-  const imageY = useTransform(imageScroll, [0, 1], [prefersReduced ? 0 : 10, 0])
+  const imageY = useTransform(imageScroll, [0, 1], [prefersReduced ? 0 : 20, 0])
 
   return (
     <div
@@ -91,7 +91,7 @@ function MilestoneCard({ milestone, index }) {
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ delay: 0.2 + index * 0.12 }}
+        transition={{ delay: 0.22 + index * 0.12 }}
         className={`col-start-2 md:col-start-auto ${
           isEven ? 'md:order-1 md:text-right' : 'md:order-2'
         }`}
@@ -127,7 +127,7 @@ function MilestoneCard({ milestone, index }) {
             ref={imageRef}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
             className="mt-4 inline-block w-full max-w-sm"
             style={{ y: imageY }}
@@ -165,7 +165,7 @@ export default function OurStory() {
   const timelineRef = useRef(null)
 
   return (
-    <section id="story" className="relative bg-ivory py-24 md:py-32 section-fade">
+    <section id="story" className="relative bg-ivory py-24 md:py-32 min-h-[110vh] section-fade">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-transparent to-ink/[0.02]"
         aria-hidden="true"
@@ -175,7 +175,7 @@ export default function OurStory() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true }}
           className="text-center mb-16 md:mb-24"
         >

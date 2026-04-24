@@ -1,11 +1,19 @@
-import { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import { EVENTS } from '../../lib/constants'
 
 export default function VenueMap() {
   const [activeId, setActiveId] = useState(EVENTS[0].id)
   const active = EVENTS.find((e) => e.id === activeId) || EVENTS[0]
+  const sectionRef = useRef(null)
+  const prefersReduced = useReducedMotion()
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  })
+  const mapY = useTransform(scrollYProgress, [0, 1], [prefersReduced ? 0 : 18, prefersReduced ? 0 : -18])
 
   const handleFocusVenue = useCallback((e) => {
     const id = e.detail?.id
@@ -23,13 +31,17 @@ export default function VenueMap() {
   const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(active.mapsQuery)}`
 
   return (
-    <section id="map" className="relative bg-champagne/30 py-24 md:py-32 section-fade section-fade-champagne">
+    <section
+      id="map"
+      ref={sectionRef}
+      className="relative bg-champagne/30 py-24 md:py-32 min-h-[110vh] section-fade section-fade-champagne"
+    >
       <div className="mx-auto max-w-5xl px-6">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true }}
           className="text-center mb-14 md:mb-20"
         >
@@ -66,9 +78,11 @@ export default function VenueMap() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden rounded-2xl border border-gold/20 shadow-soft"
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="relative overflow-hidden rounded-2xl border border-gold/20 shadow-soft shadow-[0_20px_60px_rgba(201,169,110,0.18)]"
+            style={{ y: mapY, willChange: 'transform' }}
           >
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ivory via-transparent opacity-70" aria-hidden="true" />
             <div className="aspect-[4/3] md:aspect-video">
               <iframe
                 src={mapSrc}
@@ -89,7 +103,7 @@ export default function VenueMap() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 text-center"
           >
             <p className="font-serif text-xl text-ink mb-1">{active.venue}</p>

@@ -50,17 +50,40 @@ function handleViewMap(eventId) {
 
 export default function EventCard({ event }) {
   return (
-    <div
-      className="group relative rounded-2xl bg-cream/80 backdrop-blur-sm border border-gold/20 shadow-soft p-8 md:p-10 text-center card-lift"
-      style={{
-        background:
-          'linear-gradient(rgba(255,255,255,0.4), rgba(241,231,216,0.6))',
-      }}
-    >
-      {/* Icon */}
-      <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-ivory transition-all group-hover:animate-pulse-glow group-hover:shadow-glow">
-        <EventIcon icon={event.icon} accent={event.accent} />
-      </div>
+    <div className="group perspective-[1200px]">
+      <div
+        className="relative rounded-2xl bg-cream/80 backdrop-blur-sm border border-gold/20 shadow-soft p-8 md:p-10 text-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:shadow-[0_20px_60px_rgba(201,169,110,0.25)]"
+        style={{
+          background:
+            'linear-gradient(rgba(255,255,255,0.4), rgba(241,231,216,0.6))',
+          transformStyle: 'preserve-3d',
+          transform: 'translateY(0px)',
+        }}
+        onMouseMove={(e) => {
+          const el = e.currentTarget
+          const rect = el.getBoundingClientRect()
+          const px = (e.clientX - rect.left) / rect.width
+          const py = (e.clientY - rect.top) / rect.height
+          const rx = (0.5 - py) * 4
+          const ry = (px - 0.5) * 4
+          el.style.transform = `perspective(1000px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-4px) scale(1.02)`
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)'
+        }}
+      >
+        <div
+          className="absolute inset-0 -z-10 rounded-2xl opacity-0 blur-2xl transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100"
+          aria-hidden="true"
+          style={{
+            background:
+              'radial-gradient(circle at 50% 30%, rgba(201,169,110,0.25), transparent 60%)',
+          }}
+        />
+        {/* Icon */}
+        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-ivory transition-all group-hover:animate-pulse-glow group-hover:shadow-glow">
+          <EventIcon icon={event.icon} accent={event.accent} />
+        </div>
 
       {/* Kind label */}
       <p className="text-xs font-sans font-medium uppercase tracking-[0.25em] text-goldDark mb-2">
@@ -87,26 +110,28 @@ export default function EventCard({ event }) {
       <p className="font-sans font-semibold text-ink text-sm mb-1">
         {event.venue}
       </p>
-      <p className="font-sans text-xs text-muted mb-8">
-        {event.address}
-      </p>
+        <p className="font-sans text-xs text-muted mb-8">
+          {event.address}
+        </p>
 
-      {/* Buttons */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <button
-          onClick={() => generateIcs(event)}
-          className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-3 text-xs font-medium uppercase tracking-wider text-goldDark transition-all hover:bg-gold hover:text-ivory min-h-[44px]"
-        >
-          <CalendarPlus className="h-4 w-4" />
-          Add to Calendar
-        </button>
-        <button
-          onClick={() => handleViewMap(event.id)}
-          className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-3 text-xs font-medium uppercase tracking-wider text-goldDark transition-all hover:bg-gold hover:text-ivory min-h-[44px]"
-        >
-          <MapPin className="h-4 w-4" />
-          View on Map
-        </button>
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button
+            onClick={() => generateIcs(event)}
+            className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-3 text-xs font-medium uppercase tracking-wider text-goldDark transition-all hover:bg-gold hover:text-ivory min-h-[44px] group-hover:shadow-[0_10px_20px_rgba(201,169,110,0.25)]"
+          >
+            <CalendarPlus className="h-4 w-4" />
+            Add to Calendar
+          </button>
+
+          <button
+            onClick={() => handleViewMap(event.id)}
+            className="btn-gold-shine inline-flex items-center gap-2 rounded-full border border-gold/30 bg-ivory px-5 py-3 text-xs font-medium uppercase tracking-wider text-goldDark transition-all hover:bg-gold hover:text-ivory min-h-[44px] group-hover:shadow-[0_10px_20px_rgba(201,169,110,0.25)]"
+          >
+            <MapPin className="h-4 w-4" />
+            View on Map
+          </button>
+        </div>
       </div>
     </div>
   )

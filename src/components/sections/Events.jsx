@@ -5,13 +5,13 @@ import EventCard from '../ui/EventCard'
 
 export default function Events() {
   return (
-    <section id="events" className="relative py-24 md:py-32 bg-champagne/30 section-fade section-fade-champagne">
+    <section id="events" className="relative py-24 md:py-32 min-h-[110vh] bg-champagne/30 section-fade section-fade-champagne">
       <div className="mx-auto max-w-6xl px-6">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.12 }}
+          transition={{ duration: 0.6, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true }}
           className="text-center mb-16 md:mb-20"
         >
@@ -69,7 +69,7 @@ export default function Events() {
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.12 }}
+                transition={{ delay: 0.22 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
               >
                 <EventCard event={event} />
               </motion.div>

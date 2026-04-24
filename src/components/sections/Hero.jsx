@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { COUPLE } from '../../lib/constants'
-import { fadeUp, revealMask } from '../../lib/animations'
+import { revealMask } from '../../lib/animations'
 import CrossOrnament from '../ui/CrossOrnament'
 import Picture from '../ui/Picture'
 import heroCouple from '../../assets/hero-couple.jpg'
@@ -83,8 +83,20 @@ export default function Hero({ start = true }) {
   const sectionRef = useRef(null)
   const prefersReduced = useReducedMotion()
   const [ready, setReady] = useState(false)
+  const [stage, setStage] = useState(0)
+  const baseTimeRef = useRef(null)
+  const rafRef = useRef(null)
 
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE.getTime())
+
+  const stageTimes = useMemo(() => {
+    return {
+      cross: 1,
+      names: 2,
+      meta: 3,
+      countdown: 4,
+    }
+  }, [])
 
   useEffect(() => {
     if (prefersReduced) {
@@ -94,11 +106,41 @@ export default function Hero({ start = true }) {
     setReady(Boolean(start))
   }, [start, prefersReduced])
 
+  useEffect(() => {
+    cancelAnimationFrame(rafRef.current)
+    if (!ready || prefersReduced) {
+      setStage(4)
+      baseTimeRef.current = null
+      return
+    }
+
+    if (baseTimeRef.current == null) {
+      baseTimeRef.current = performance.now()
+    }
+
+    const tick = () => {
+      const base = baseTimeRef.current ?? 0
+      const t = Math.max(0, (performance.now() - base) / 1000)
+
+      let nextStage = 0
+      if (t >= stageTimes.countdown) nextStage = 4
+      else if (t >= stageTimes.meta) nextStage = 3
+      else if (t >= stageTimes.names) nextStage = 2
+      else if (t >= stageTimes.cross) nextStage = 1
+
+      setStage((s) => (s === nextStage ? s : nextStage))
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    rafRef.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [ready, prefersReduced, stageTimes])
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   })
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, prefersReduced ? 0 : 40])
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, prefersReduced ? 0 : -40])
 
   return (
     <header
@@ -171,28 +213,40 @@ export default function Hero({ start = true }) {
 
       {/* Content */}
       <motion.div
-        variants={heroStagger}
-        initial="initial"
-        animate={ready ? 'animate' : false}
+        initial={false}
         className={`relative z-10 flex flex-col items-center px-6 text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] ${
           ready ? '' : 'opacity-0'
         }`}
       >
             {/* Label */}
             <motion.p
-              variants={fadeUp}
+              initial={{ opacity: 0, y: 24 }}
+              animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}
               className="mb-6 text-xs font-sans font-medium uppercase tracking-[0.3em] text-white/80"
             >
               We are getting married
             </motion.p>
 
             {/* Cross ornament */}
-            <motion.div variants={crossVariant} className="mb-6">
+            <motion.div
+              initial="initial"
+              animate={stage >= 1 ? 'animate' : 'initial'}
+              variants={crossVariant}
+              transition={{ ...crossVariant.animate.transition, delay: 0.18 }}
+              className="mb-6"
+            >
               <CrossOrnament />
             </motion.div>
 
             {/* Couple names */}
-            <motion.div variants={revealMask} className="mb-4 w-full px-2">
+            <motion.div
+              initial="initial"
+              animate={stage >= 2 ? 'animate' : 'initial'}
+              variants={revealMask}
+              transition={{ ...revealMask.animate.transition, delay: 0.18 }}
+              className="mb-4 w-full px-2"
+            >
               <h1 className="leading-tight">
                 <motion.span
                   variants={groomVariant}
@@ -217,14 +271,18 @@ export default function Hero({ start = true }) {
 
             {/* Ornamental divider */}
             <motion.div
-              variants={fadeUp}
+              initial={{ opacity: 0, y: 24 }}
+              animate={stage >= 3 ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
               className="my-6 h-5 w-32 bg-ornate-divider bg-center bg-no-repeat"
               aria-hidden="true"
             />
 
             {/* Date block */}
             <motion.div
-              variants={fadeUp}
+              initial={{ opacity: 0, y: 24 }}
+              animate={stage >= 3 ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.24 }}
               className="mt-6 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 inline-block text-sm md:text-base tracking-widest text-white/90"
             >
               SATURDAY • 09 MAY 2026
@@ -232,7 +290,9 @@ export default function Hero({ start = true }) {
 
             {/* Tagline */}
             <motion.p
-              variants={fadeUp}
+              initial={{ opacity: 0, y: 24 }}
+              animate={stage >= 3 ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
               className="mt-4 max-w-md font-serif italic text-sm sm:text-base text-white/80 leading-relaxed"
             >
               Two souls, one faith, one forever — joined in Christ’s love.
@@ -240,8 +300,8 @@ export default function Hero({ start = true }) {
 
             <motion.div
               initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut', delay: 1.25 }}
+              animate={stage >= 4 ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
               className="mt-8 flex justify-center gap-4 flex-wrap"
             >
               {[
@@ -255,8 +315,8 @@ export default function Hero({ start = true }) {
                   <motion.div
                     key={item.label}
                     initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 1.35 + idx * 0.06 }}
+                    animate={stage >= 4 ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                    transition={{ duration: 0.5, delay: 0.22 + idx * 0.06, ease: [0.22, 1, 0.36, 1] }}
                     whileHover={{ scale: 1.05 }}
                     className={`flex flex-col items-center px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 min-w-[70px] flex-[1_1_calc(50%-1rem)] sm:flex-[0_0_auto] shadow-[0_0_40px_rgba(201,169,110,0.2)] transition-transform ${
                       isSeconds ? 'shadow-[0_0_45px_rgba(201,169,110,0.22)]' : ''

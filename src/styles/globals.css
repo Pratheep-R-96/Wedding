@@ -193,20 +193,20 @@
 
   .section-fade::before {
     top: 0;
-    background: linear-gradient(to bottom, theme('colors.ivory'), transparent);
+    background: linear-gradient(to bottom, transparent, theme('colors.ivory'));
   }
 
   .section-fade::after {
     bottom: 0;
-    background: linear-gradient(to top, theme('colors.ivory'), transparent);
+    background: linear-gradient(to top, transparent, theme('colors.ivory'));
   }
 
   .section-fade-champagne::before {
-    background: linear-gradient(to bottom, theme('colors.champagne / 30%'), transparent);
+    background: linear-gradient(to bottom, transparent, theme('colors.champagne / 30%'));
   }
 
   .section-fade-champagne::after {
-    background: linear-gradient(to top, theme('colors.champagne / 30%'), transparent);
+    background: linear-gradient(to top, transparent, theme('colors.champagne / 30%'));
   }
 
   .heading-serif {
