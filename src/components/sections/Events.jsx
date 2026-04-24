@@ -11,10 +11,13 @@ export default function Events() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.12 }}
           viewport={{ once: true }}
           className="text-center mb-16 md:mb-20"
         >
+          <p className="text-[11px] md:text-xs font-sans tracking-[0.18em] text-muted/80 mb-3">
+            Join us as we celebrate each moment
+          </p>
           <p className="text-xs font-sans font-medium uppercase tracking-[0.3em] text-muted mb-4">
             The Celebrations
           </p>
@@ -29,7 +32,7 @@ export default function Events() {
           variants={{
             initial: {},
             animate: {
-              transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+              transition: { staggerChildren: 0.15, delayChildren: 0.22 },
             },
           }}
           initial="initial"

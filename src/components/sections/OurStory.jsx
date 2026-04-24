@@ -91,7 +91,7 @@ function MilestoneCard({ milestone, index }) {
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ delay: index * 0.1 }}
+        transition={{ delay: 0.2 + index * 0.12 }}
         className={`col-start-2 md:col-start-auto ${
           isEven ? 'md:order-1 md:text-right' : 'md:order-2'
         }`}
@@ -166,15 +166,22 @@ export default function OurStory() {
 
   return (
     <section id="story" className="relative bg-ivory py-24 md:py-32 section-fade">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-transparent to-ink/[0.02]"
+        aria-hidden="true"
+      />
       <div className="mx-auto max-w-6xl px-6">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
           className="text-center mb-16 md:mb-24"
         >
+          <p className="text-[11px] md:text-xs font-sans tracking-[0.18em] text-muted/80 mb-3">
+            Our journey began here...
+          </p>
           <p className="text-xs font-sans font-medium uppercase tracking-[0.3em] text-muted mb-4">
             Our Journey
           </p>
