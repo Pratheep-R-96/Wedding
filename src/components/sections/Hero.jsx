@@ -152,8 +152,6 @@ export default function Hero({ start = true }) {
       <div className="absolute inset-0 opacity-[0.06] mix-blend-overlay pointer-events-none bg-[url('/textures/noise.png')]" />
       <div className="absolute top-0 left-1/2 w-[340px] h-[340px] sm:w-[400px] sm:h-[400px] -translate-x-1/2 bg-gold/20 blur-3xl opacity-30" />
 
-      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-b from-transparent to-ivory"></div>
-
       {/* Gold shimmer specks */}
       {SHIMMER_DOTS.map((dot, i) => (
         <span
@@ -226,7 +224,7 @@ export default function Hero({ start = true }) {
               variants={fadeUp}
               className="mt-6 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 inline-block text-sm md:text-base tracking-widest text-white/90"
             >
-              SATURDAY • 09 MAY 2026 • TIRUNELVELI
+              SATURDAY • 09 MAY 2026
             </motion.div>
 
             {/* Tagline */}
