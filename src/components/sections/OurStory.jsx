@@ -39,7 +39,7 @@ function TimelineLine({ containerRef }) {
         y1="0"
         x2="1"
         y2="100%"
-        stroke="#E9D9B8"
+        stroke="#E6D3A3"
         strokeWidth="2"
         style={{ pathLength }}
       />

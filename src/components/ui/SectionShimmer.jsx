@@ -4,7 +4,7 @@ export default function SectionShimmer({ minHeight = 'min-h-[600px]' }) {
     <div
       className={`${minHeight} w-full rounded-none animate-shimmer`}
       style={{
-        background: 'linear-gradient(90deg, #E9D9B8 25%, #F5EDE1 50%, #E9D9B8 75%)',
+        background: 'linear-gradient(90deg, #E6D3A3 25%, #F1E7D8 50%, #E6D3A3 75%)',
         backgroundSize: '400% 100%',
       }}
       aria-hidden="true"

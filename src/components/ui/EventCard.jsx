@@ -50,7 +50,13 @@ function handleViewMap(eventId) {
 
 export default function EventCard({ event }) {
   return (
-    <div className="group relative rounded-2xl bg-cream border border-gold/20 shadow-soft p-8 md:p-10 text-center card-lift">
+    <div
+      className="group relative rounded-2xl bg-cream/80 backdrop-blur-sm border border-gold/20 shadow-soft p-8 md:p-10 text-center card-lift"
+      style={{
+        background:
+          'linear-gradient(rgba(255,255,255,0.4), rgba(241,231,216,0.6))',
+      }}
+    >
       {/* Icon */}
       <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-ivory transition-all group-hover:animate-pulse-glow">
         <EventIcon icon={event.icon} accent={event.accent} />

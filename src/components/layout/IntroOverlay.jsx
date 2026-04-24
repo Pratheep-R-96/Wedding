@@ -65,7 +65,7 @@ export default function IntroOverlay({ onEnter }) {
           animate="animate"
           exit="exit"
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-darkBg via-darkBg/80 to-transparent" />
 
           <div className="relative mx-auto flex max-w-lg flex-col items-center px-8 text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
             <motion.div variants={monogram} initial="initial" animate="animate">

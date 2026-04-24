@@ -16,7 +16,7 @@ function ConfettiBurst() {
         y: -(Math.random() * 160 + 40),
         r: Math.random() * 360,
         size: Math.random() * 6 + 4,
-        color: ['#C9A96E', '#E8CFC9', '#B5BFA1', '#E9D9B8', '#A07F49'][i % 5],
+        color: ['#C9A96E', '#E8CFC9', '#B5BFA1', '#E6D3A3', '#9F7A3F'][i % 5],
         delay: Math.random() * 0.3,
       })),
     []
@@ -53,7 +53,13 @@ function FlipDigit({ value, label }) {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative flex h-28 w-28 sm:h-32 sm:w-32 md:h-36 md:w-36 items-center justify-center rounded-2xl bg-ivory/80 backdrop-blur border border-gold/20 shadow-soft overflow-hidden">
+      <div
+        className="relative flex h-28 w-28 sm:h-32 sm:w-32 md:h-36 md:w-36 items-center justify-center rounded-2xl bg-cream/80 backdrop-blur-sm border border-gold/20 shadow-soft overflow-hidden"
+        style={{
+          background:
+            'linear-gradient(rgba(255,255,255,0.4), rgba(241,231,216,0.6))',
+        }}
+      >
         <AnimatePresence mode="popLayout">
           <motion.span
             key={padded}
@@ -61,7 +67,7 @@ function FlipDigit({ value, label }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 1.1, y: -10 }}
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-            className="font-serif text-6xl md:text-7xl text-goldDark"
+            className="font-serif text-6xl md:text-7xl text-ink"
           >
             {padded}
           </motion.span>
@@ -101,8 +107,8 @@ export default function Countdown() {
         />
       </motion.div>
 
-      {/* Ivory overlay */}
-      <div className="absolute inset-0 bg-ivory/85" />
+      {/* Warm overlay */}
+      <div className="absolute inset-0 bg-cream/85" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
@@ -131,7 +137,7 @@ export default function Countdown() {
             className="relative"
           >
             <ConfettiBurst />
-            <h3 className="font-serif text-4xl md:text-5xl text-gold">
+            <h3 className="font-serif text-4xl md:text-5xl text-ink">
               We&rsquo;re married! 💍
             </h3>
           </motion.div>

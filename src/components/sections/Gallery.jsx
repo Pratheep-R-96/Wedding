@@ -60,7 +60,7 @@ export default function Gallery() {
   )
 
   return (
-    <section id="gallery" className="relative bg-ivory py-24 md:py-32 section-fade">
+    <section id="gallery" className="relative bg-cream py-24 md:py-32 section-fade">
       <div className="mx-auto max-w-7xl px-6">
         {/* Heading */}
         <motion.div

@@ -5,15 +5,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        ivory: '#FBF7F0',
-        cream: '#F5EDE1',
-        champagne: '#E9D9B8',
+        ivory: '#F8F3EB',
+        cream: '#F1E7D8',
+        champagne: '#E6D3A3',
         gold: '#C9A96E',
-        goldDark: '#A07F49',
+        goldSoft: '#D8C08A',
+        goldDark: '#9F7A3F',
         blush: '#E8CFC9',
         sage: '#B5BFA1',
-        ink: '#2B2622',
-        muted: '#7A6F63',
+        ink: '#1E1B18',
+        muted: '#6F655B',
+        darkBg: '#0F0E0D',
       },
       fontFamily: {
         serif: ['"Playfair Display"', 'Georgia', 'serif'],

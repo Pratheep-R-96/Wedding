@@ -143,14 +143,16 @@ export default function Hero({ start = true }) {
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-black/40"></div>
+      <div className="absolute inset-0 bg-darkBg/40"></div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-darkBg/60 via-darkBg/30 to-darkBg/70"></div>
 
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.15),rgba(0,0,0,0.6))]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,14,13,0.15),rgba(15,14,13,0.6))]"></div>
 
       <div className="absolute inset-0 opacity-[0.06] mix-blend-overlay pointer-events-none bg-[url('/textures/noise.png')]" />
       <div className="absolute top-0 left-1/2 w-[340px] h-[340px] sm:w-[400px] sm:h-[400px] -translate-x-1/2 bg-gold/20 blur-3xl opacity-30" />
+
+      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-b from-transparent to-ivory"></div>
 
       {/* Gold shimmer specks */}
       {SHIMMER_DOTS.map((dot, i) => (
