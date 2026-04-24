@@ -58,6 +58,16 @@
     overflow-x: hidden;
   }
 
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('/textures/noise.png');
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1;
+  }
+
   section[id] {
     scroll-margin-top: 96px;
   }
@@ -77,14 +87,27 @@
     outline: none;
   }
 
-  body::after {
+  section.section-fade::before {
     content: '';
-    position: fixed;
-    inset: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 96px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.02));
     pointer-events: none;
-    z-index: 9999;
-    opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  header#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 96px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.02));
+    pointer-events: none;
+    z-index: 1;
   }
 }
 
@@ -242,8 +265,8 @@
   }
 
   .card-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(201, 169, 110, 0.15);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px -10px rgba(160, 127, 73, 0.25);
   }
 }
 

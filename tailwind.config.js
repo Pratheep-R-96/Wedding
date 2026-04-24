@@ -23,7 +23,7 @@ export default {
         script: ['"Great Vibes"', 'cursive'],
       },
       boxShadow: {
-        soft: '0 10px 40px -12px rgba(160, 127, 73, 0.25)',
+        soft: '0 20px 60px -10px rgba(160, 127, 73, 0.25)',
         glow: '0 0 60px rgba(201, 169, 110, 0.35)',
       },
       backgroundImage: {
